@@ -1,0 +1,220 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<div class="content-section">
+		<form method="POST" >
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<div class="form-group" >
+					{{ form.loan_amnt.label(class="form-control-label") }}
+					{% if form.loan_amnt.errors %}
+						{{ form.loan_amnt(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.loan_amnt.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.loan_amnt(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.term.label(class="form-control-label") }}
+					{% if form.term.errors %}
+						{{ form.term(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.term.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.term(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.emp_length.label(class="form-control-label") }}
+					
+					{% if form.emp_length.errors %}
+						{{ form.emp_length(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.emp_length.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.emp_length(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.home_ownership.label(class="form-control-label") }}
+					{% if form.home_ownership.errors %}
+						{{ form.home_ownership(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.home_ownership.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.home_ownership(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				
+				<div class="form-group" >
+					{{ form.annual_inc.label(class="form-control-label") }}
+
+					{% if form.annual_inc.errors %}
+						{{ form.annual_inc(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.annual_inc.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.annual_inc(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				
+				<div class="form-group" >
+					{{ form.zip_code.label(class="form-control-label") }}
+					{% if form.zip_code.errors %}
+						{{ form.zip_code(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.zip_code.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.zip_code(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				
+				<div class="form-group" >
+					{{ form.debt.label(class="form-control-label") }}
+
+					{% if form.debt.errors %}
+						{{ form.debt(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.debt.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.debt(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				
+				<div class="form-group" >
+					{{ form.delinq_2yrs.label(class="form-control-label") }}
+
+					{% if form.delinq_2yrs.errors %}
+						{{ form.delinq_2yrs(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.delinq_2yrs.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.delinq_2yrs(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+
+				<div class="form-group" >
+					{{ form.inq_last_6mths.label(class="form-control-label") }}
+
+					{% if form.inq_last_6mths.errors %}
+						{{ form.inq_last_6mths(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.inq_last_6mths.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.inq_last_6mths(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.mths_since_last_delinq.label(class="form-control-label") }}
+
+					{% if form.mths_since_last_delinq.errors %}
+						{{ form.mths_since_last_delinq(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.mths_since_last_delinq.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.mths_since_last_delinq(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.open_acc.label(class="form-control-label") }}
+
+					{% if form.open_acc.errors %}
+						{{ form.open_acc(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.open_acc.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.open_acc(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.total_acc.label(class="form-control-label") }}
+					
+					{% if form.total_acc.errors %}
+						{{ form.total_acc(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.total_acc.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.total_acc(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				<div class="form-group" >
+					{{ form.revol_bal.label(class="form-control-label") }}
+
+					{% if form.revol_bal.errors %}
+						{{ form.revol_bal(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.revol_bal.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.revol_bal(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+
+				<div class="form-group" >
+					{{ form.cred_hist_year.label(class="form-control-label") }}
+
+					{% if form.cred_hist_year.errors %}
+						{{ form.cred_hist_year(class="form-control form-control-sm is-invalid")}}
+						<div class="invalid-feedback ">
+							{% for error in form.cred_hist_year.errors%}
+								<span> {{ error }} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.cred_hist_year(class="form-control form-control-sm")}}
+					{% endif %}
+				</div>
+				
+				{% for field, errors in form.errors.items() %}
+				<div class="alert alert-error">
+					{{ form[field].label }}: {{ ', '.join(errors) }}
+				</div>
+				{% endfor %}
+				
+			</fieldset>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info")}}
+			</div>
+		</form>
+	</div>
+
+{% endblock content %}
