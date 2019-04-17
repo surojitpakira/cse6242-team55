@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Loan Results</title>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+        <style>
+            text{
+                font-family: sans-serif;
+                font-size: 12px;
+                text-anchor: left;
+            }
+		</style>
+    </head>
+    <div id="inputs"></div>
+    <div class="pagebreak"> </div>
+    <div id="summary"></div>
+    <div class="pagebreak"> </div>
+    <div id="approval"></div>
+    <div class="pagebreak"> </div>
+    <div id="stats"></div> 
+    <div class="pagebreak"> </div>
+    <div id="chloro"></div> 
+    <body>
+        <script type="text/javascript">
+
+        var margin = 50,
+            credit_score = 750,
+            approved = "Yes",
+            int_rate = "XX.XX"
+            loan_amt = "XXX",
+            term = "XXX",
+            emp_length = "XXX",
+            annual_inc = "XXX",
+            zip_code = "XXX",
+            debt = "XXX",
+            dti = "XXX",
+            delinq_2yrs = "XXX",
+            inq_last_6mths = "XXX",
+            mths_since_last_delinq = "XXX",
+            open_acc = "XXX",
+            total_acc = "XXX",
+            revol_bal = "XXX",
+            revol_util = "XXX",
+            cred_hist_mth = "XXX",
+            revol_bal_to_annual_inc = "XXX"
+            alt1_amt = "XXX",
+            alt1_term = "36 months",
+            alt1_int = "XX.XX",
+            alt2_amt = "XXX",
+            alt2_term = "60 months",
+            alt2_int = "XX.XX"
+            ;
+
+//----------------USER INPUTS------------------------------------------
+
+        var inputs_height = 100,
+            inputs_width = 800;
+
+        var svg = d3.select("#inputs").append("svg")
+            .attr("width", inputs_width + margin)
+            .attr("height", inputs_height + margin)
+            .append("g")
+            .attr("transform", "translate(" + margin + "," + margin + ")");
+
+        svg.append("text")
+            .attr("class", "title")
+            .attr("x",(inputs_width+margin)/2-margin)
+            .attr("y",-margin+27)
+            .style("text-anchor","middle")
+            .style("font-weight","bold")
+            .style("font-size","17px")
+            .text("User Inputs");
+
+        svg.append("line")
+            .style("stroke", "black")
+            .style("stroke-width", "2px")
+            .attr("x1", -margin)
+            .attr("y1", -margin+2)
+            .attr("x2", inputs_width+margin)
+            .attr("y2", -margin+2);
+
+
+
+//----------------LOAN SUMMARY------------------------------------------
+
+        var summary_height = 100,
+            summary_width = 800;
+
+        var svg2 = d3.select("#summary").append("svg")
+            .attr("width", summary_width + margin)
+            .attr("height", summary_height + margin)
+            .append("g")
+            .attr("transform", "translate(" + margin + "," + margin + ")");    
+
+        svg2.append("text")
+            .attr("class", "title")
+            .attr("x",(summary_width+margin)/2-margin)
+            .attr("y",-margin+27)
+            .style("text-anchor","middle")
+            .style("font-weight","bold")
+            .style("font-size","17px")
+            .text("Loan Summary");
+
+        svg2.append("line")
+            .style("stroke", "black")
+            .style("stroke-width", "2px")
+            .attr("x1", -margin)
+            .attr("y1", -margin+2)
+            .attr("x2", summary_width+margin)
+            .attr("y2", -margin+2);
+
+//FIRST COLUMN
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",-40)
+            .attr("y",-margin+60)
+            .text("Loan Amount:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",-40)
+            .attr("y",-margin+80)
+            .text("Term:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",-40)
+            .attr("y",-margin+100)
+            .text("Employment Legnth:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",-40)
+            .attr("y",-margin+120)
+            .text("Zip Code:");
+
+    //INSERT VALUES
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",80)
+            .attr("y",-margin+60)
+            .text("$"+loan_amt);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",80)
+            .attr("y",-margin+80)
+            .text(term + " mo");
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",80)
+            .attr("y",-margin+100)
+            .text(emp_length + " yrs");
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",80)
+            .attr("y",-margin+120)
+            .text(zip_code);
+
+//SECOND COLUMN
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",150)
+            .attr("y",-margin+60)
+            .text("Annual Income:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",150)
+            .attr("y",-margin+80)
+            .text("Debt - Income Ratio:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",150)
+            .attr("y",-margin+100)
+            .text("Revolving Balance:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",150)
+            .attr("y",-margin+120)
+            .text("Revolving Bal. - Income Ratio:");
+
+    //INSERT VALUES
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",320)
+            .attr("y",-margin+60)
+            .text("$"+annual_inc);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",320)
+            .attr("y",-margin+80)
+            .text(dti);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",320)
+            .attr("y",-margin+100)
+            .text("$"+revol_bal);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",320)
+            .attr("y",-margin+120)
+            .text(revol_bal_to_annual_inc);
+
+//THIRD COLUMN
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",380)
+            .attr("y",-margin+60)
+            .text("# Total Accounts:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",380)
+            .attr("y",-margin+80)
+            .text("# Open Accounts:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",380)
+            .attr("y",-margin+100)
+            .text("# Deliquencies in Last 2 Years:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",380)
+            .attr("y",-margin+120)
+            .text("# Months Since Delinquency:");
+
+    //INSERT VALUES
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+60)
+            .text(total_acc);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+80)
+            .text(open_acc);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+100)
+            .text(delinq_2yrs);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+120)
+            .text(mths_since_last_delinq);
+
+//LAST COLUMN
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",600)
+            .attr("y",-margin+60)
+            .text("# Months of Credit History:");
+
+        svg2.append("text")
+            .attr("class", "subtitle")
+            .attr("x",600)
+            .attr("y",-margin+80)
+            .text("# Inquiries in Last 6 Months:");
+    
+    //INSERT VALUES
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",760)
+            .attr("y",-margin+60)
+            .text(cred_hist_mth);
+
+        svg2.append("text")
+            .attr("class", "value")
+            .attr("x",760)
+            .attr("y",-margin+80)
+            .text(inq_last_6mths);
+
+
+
+//----------------LOAN APPROVAL------------------------------------------
+            
+        var approval_height = 150,
+            approval_width = 800;
+
+        var ap_mid = (approval_width+margin)/2-margin
+
+        var svg3 = d3.select("#approval").append("svg")
+            .attr("width", approval_width + margin)
+            .attr("height", approval_height + margin)
+            .append("g")
+            .attr("transform", "translate(" + margin + "," + margin + ")");  
+
+        svg3.append("text")
+            .attr("class", "title")
+            .attr("x",ap_mid)
+            .attr("y",-margin+27)
+            .style("text-anchor","middle")
+            .style("font-weight","bold")
+            .style("font-size","17px")
+            .text("Loan Approval");
+
+        svg3.append("line")
+            .style("stroke", "black")
+            .style("stroke-width", "2px")
+            .attr("x1", -margin)
+            .attr("y1", -margin+2)
+            .attr("x2", approval_width+margin*2)
+            .attr("y2", -margin+2);
+
+    //LOAN APPROVAL
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",230)
+            .attr("y",-margin+60)
+            .style("font-size","13px")
+            .style("font-weight","bold")
+            .text("Is Loan Likely To Be Approved:");
+
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",440)
+            .attr("y",-margin+60)
+            .style("font-size","13px")
+            .style("font-weight","bold")
+            .text(approved);
+
+    //INTEREST RATE
+        //IF STATEMENT - IF YES POPULATE INT RATE, IF NO EMPTY
+
+        if (approved=="Yes") {
+            svg3.append("text")
+                .attr("class", "subtitle")
+                .attr("x",230)
+                .attr("y",-margin+85)
+                .style("font-size","13px")
+                .style("font-weight","bold")
+                .text("Likely Interest Rate:");
+
+            svg3.append("text")
+                .attr("class", "value")
+                .attr("x",440)
+                .attr("y",-margin+85)
+                .style("font-size","13px")
+                .style("font-weight","bold")
+                .text(int_rate+"%");}
+        else {}
+    
+    
+    //ALTERNATE 1
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",140)
+            .attr("y",-margin+120)
+            .style("font-size","13px")
+            .style("text-decoration", "underline") 
+            .text("Alternate Loan 1");
+        
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",140)
+            .attr("y",-margin+140)
+            .text("Loan Amount");
+
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",140)
+            .attr("y",-margin+160)
+            .text("Term");
+
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",140)
+            .attr("y",-margin+180)
+            .text("Likely Interest Rate");
+
+    //INSERT VALUES
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",280)
+            .attr("y",-margin+140)
+            .text("$"+alt1_amt);
+
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",280)
+            .attr("y",-margin+160)
+            .text(alt1_term);
+
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",280)
+            .attr("y",-margin+180)
+            .text(alt1_int+"%");
+
+    //ALTERNATE 2
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",430)
+            .attr("y",-margin+120)
+            .style("font-size","13px")
+            .style("text-decoration", "underline") 
+            .text("Alternate Loan 2");
+
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",430)
+            .attr("y",-margin+140)
+            .text("Loan Amount");
+
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",430)
+            .attr("y",-margin+160)
+            .text("Term");
+
+        svg3.append("text")
+            .attr("class", "subtitle")
+            .attr("x",430)
+            .attr("y",-margin+180)
+            .text("Likely Interest Rate");
+
+    //INSERT VALUES
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+140)
+            .text("$"+alt2_amt);
+
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+160)
+            .text(alt2_term);
+
+        svg3.append("text")
+            .attr("class", "value")
+            .attr("x",550)
+            .attr("y",-margin+180)
+            .text(alt2_int+"%");
+        
+
+//----------------KEY STATISTICS------------------------------------------
+
+        var stats_height = 1000,
+            stats_width = 800;
+
+        var gauge_width = 300,
+            gauge_height     = 200, 
+            gauge_margin     = 20,
+            n          = 30,
+            radius     = gauge_width/2 - (gauge_margin*2),
+            needleRad  = 10,
+            pi         = Math.PI,
+            halfPi     = pi/2,
+            endAngle   = pi/2,
+            startAngle = -endAngle,
+            data       = d3.range(startAngle, endAngle, pi/n),
+            _data      = data.slice(0),
+            tt         = 3000,
+            gauge_scale      = d3.scale.linear().range([startAngle, endAngle]).domain([300,850]),
+            gauge_colorScale = d3.scale.quantize().range(colorbrewer.RdYlGn[6]).domain([data[0], data[data.length-1]]),
+            gauge_scoreScale = d3.scale.linear().domain([startAngle, endAngle]).range([300,850]);
+
+        var svg4 = d3.select("#stats").append("svg")
+            .attr("width", stats_width+margin)
+            .attr("height", stats_height+margin)
+            .append("g")
+            .attr("transform", "translate(" + 150 + "," + 200 + ")");  
+        
+        svg4.append("text")
+            .attr("class", "title")
+            .attr("x",(stats_width+margin)/2-150)
+            .attr("y",-200+27)
+            .style("text-anchor","middle")
+            .style("font-weight","bold")
+            .style("font-size","17px")
+            .text("Key Statistics");
+
+        svg4.append("line")
+            .style("stroke", "black")
+            .style("stroke-width", "2px")
+            .attr("x1", -200)
+            .attr("y1", -198)
+            .attr("x2", stats_width+margin*2)
+            .attr("y2", -198);
+
+        _data.push(endAngle);
+
+        var arc = d3.svg.arc()
+            .innerRadius(radius - (radius/5))
+            .outerRadius(radius)
+            .startAngle(function(d) { return d; })
+            .endAngle(function(d, i) { return _data[i + 1]; });
+
+        var slice = svg4.append('g').selectAll('path.slice').data(data);
+
+        slice
+            .enter()
+            .append('path')
+            .attr('class', 'slice')
+            .attr('d', arc)
+            .attr('fill', function(d) { return gauge_colorScale(d); });
+
+        var needle = svg4.append('g').append('path').attr('class', 'needle').attr('fill-opacity', .7).attr('stroke', 'black');
+        var text   = svg4.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').style("font-family","Tahoma");
+
+        svg4.append("text")
+                .attr("class", "subtitle")
+                .attr("x",0)
+                .attr("y",-150)
+                .style("text-anchor","middle")
+                .style("text-decoration", "underline") 
+                .style("font-size","13px")
+                .text("Applicant Score");
+
+        function update(oldValue, newValue){
+            needle
+                .datum({ oldValue: oldValue })
+                .transition().duration(tt)
+                .attrTween('d', lineTween(newValue))
+                ;
+
+            text
+                .datum({ oldValue: oldValue })
+                .transition().duration(tt)
+                .attrTween('transform', transformTween(newValue))
+                .tween('text', textTween(newValue));
+        }
+
+        function textTween(newValue){
+            return function(d){
+
+                var that = d3.select(this),
+                    i    = d3.interpolate(d.oldValue, newValue);
+
+                return function(t){
+                    that.text(d3.format('.0f')(gauge_scoreScale(i(t))));
+                };
+            };
+        }
+
+        function transformTween(newValue){
+            return function(d){
+
+                var interpolate = d3.interpolate(d.oldValue, newValue);
+
+                return function(t){
+                    var _in     = interpolate(t) - halfPi,
+                        centerX = (radius + 20) * Math.cos(_in),
+                        centerY = (radius + 20) * Math.sin(_in);
+                    return 'translate(' + centerX + ',' + centerY + ')';
+                };
+            };
+        }
+
+        function lineTween(newValue){
+            return function(d){
+
+                var interpolate = d3.interpolate(d.oldValue, newValue);
+
+                return function(t){
+
+                    var _in = interpolate(t) - halfPi,
+                        _im = _in - halfPi,
+                        _ip = _in + halfPi;
+
+                    var topX = radius * Math.cos(_in),
+                        topY = radius * Math.sin(_in);
+
+                    var leftX = needleRad * Math.cos(_im),
+                        leftY = needleRad * Math.sin(_im);
+
+                    var rightX = needleRad * Math.cos(_ip),
+                        rightY = needleRad * Math.sin(_ip);
+
+                    return d3.svg.line()([[topX, topY], [leftX, leftY], [rightX, rightY]]) + 'Z';
+                };
+            };
+        }
+
+    // RUN CREDIT SCORE NEEDLE
+        update(gauge_scale(300), gauge_scale(credit_score));
+
+
+    </script>
+</body>
