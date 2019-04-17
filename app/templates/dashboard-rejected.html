@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<body>
+<h1> this is the dashboard </h1>
+
+{% if data['approval'] %}
+	<p> your interest rate is {{data['interest']}} </p>
+	<p> your credit score is {{data['Credit_Score']}} </p>
+{% endif %}
+
+</body>
+{% endblock content %}
