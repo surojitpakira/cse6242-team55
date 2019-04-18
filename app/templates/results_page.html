@@ -26,9 +26,9 @@
         <script type="text/javascript">
 
         var margin = 50,
-            credit_score = 720,
-            approved = "Yes",
-            int_rate = "XX.XX"
+            Credit_Score = 750,
+            approval = true,
+            interest = "XX.XX"
             loan_amt = "XXX",
             term = "XXX",
             emp_length = "XXX",
@@ -334,12 +334,14 @@
             .attr("y",-margin+60)
             .style("font-size","13px")
             .style("font-weight","bold")
-            .text(approved);
+            .text( function(d) {
+                if (approval==true) { return "Yes"}
+                else {return "No"} } );
 
     //INTEREST RATE
         //IF STATEMENT - IF YES POPULATE INT RATE, IF NO EMPTY
 
-        if (approved=="Yes") {
+        if (approval==true) {
             svg3.append("text")
                 .attr("class", "subtitle")
                 .attr("x",230)
@@ -354,7 +356,7 @@
                 .attr("y",-margin+85)
                 .style("font-size","13px")
                 .style("font-weight","bold")
-                .text(int_rate+"%");}
+                .text(interest+"%");}
         else {}
     
     
@@ -591,7 +593,7 @@
         }
 
     // RUN CREDIT SCORE NEEDLE
-        update(gauge_scale(300), gauge_scale(credit_score));
+        update(gauge_scale(300), gauge_scale(Credit_Score));
 
 
     </script>
