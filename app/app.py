@@ -45,25 +45,29 @@ def dashboard():
     
     ## check if the loan is approved or not
     approval = modelAPI.getApproval(inputdf)
-    
-    ## initialize data
-    data ={}
-    
-    if approval:
-        
-        data['approval'] = approval
-        data['interest'] = modelAPI.getInterestRate(inputdf)
-        data['Credit_Score'] = modelAPI.getCreditScore(inputdf)
 
-        return render_template('dashboard-approved.html',title='dashboard',data=data)
-
+    ## initialize data    
+    data['approval'] = modelAPI.getApproval(inputdf)
+    data['interest'] = modelAPI.getInterestRate(inputdf)
+    data['Credit_Score'] = modelAPI.getCreditScore(inputdf)
+    
+    if data['approval'] == 'true':
+        data['alt1_amt']='none'
+        data['alt1_term']='none'
+        data['alt2_amt']='none'
+        data['alt2_rate']='none'
     else:
+        alternate =modelAPI.getAlternative(inputdf)
+        data['alt1_amt']=alternate[0]
+        data['alt1_rate']=alternate[1]
+        data['alt2_amt']=alternate[2]
+        data['alt2_rate']=alternate[3]
         
-        data['alternate'] = modelAPI.getAlternative(inputdf)
-        return render_template('dashboard-rejected.html',title='dashboard',data=data)
+    return render_template('results_page.html',data=data)
 
 def ParseUserInput(form):
     ''' parse user intput into right format, output the dictionary for ML model
+        
         Input: 
             form: from Userinput
         Output:
@@ -78,6 +82,7 @@ def ParseUserInput(form):
     output_dict['home_ownership']           = form.home_ownership.data
     output_dict['annual_inc']               = float(form.annual_inc.data)
     output_dict['zip_code']                 = str(form.zip_code.data)[:3]
+    output_dict['debt']                     = float(form.debt.data)
     debt                                    = float(form.debt.data)
     annual_inc                              = float(form.annual_inc.data)
     if annual_inc !=0:
