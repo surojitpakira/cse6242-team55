@@ -26,31 +26,32 @@
         <script type="text/javascript">
 
         var margin = 50,
-            Credit_Score = 750,
-            approval = true,
-            interest = "XX.XX"
-            loan_amt = "XXX",
-            term = "XXX",
-            emp_length = "XXX",
-            annual_inc = "XXX",
-            zip_code = "XXX",
-            debt = "XXX",
-            dti = "XXX",
-            delinq_2yrs = "XXX",
-            inq_last_6mths = "XXX",
-            mths_since_last_delinq = "XXX",
-            open_acc = "XXX",
-            total_acc = "XXX",
-            revol_bal = "XXX",
-            revol_util = "XXX",
-            cred_hist_mth = "XXX",
-            revol_bal_to_annual_inc = "XXX"
-            alt1_amt = "XXX",
-            alt1_term = "36 months",
-            alt1_int = "XX.XX",
-            alt2_amt = "XXX",
+            Credit_Score = {{data.Credit_Score|tojson}},
+            int_rate = {{data.interest|tojson}},
+            loan_amt = {{data.loan_amnt|tojson}},
+            term = {{data.term|tojson}},
+            approved = {{data.approval|tojson}},
+            emp_length = {{data.emp_length|tojson}},
+            annual_inc = {{data.annual_inc|tojson}},
+            zip_code = {{data.zip_code|tojson}},
+            debt = {{data.debt|tojson}},
+            dti = {{data.dti|tojson}},
+            delinq_2yrs = {{data.delinq_2yrs|tojson}},
+            inq_last_6mths = {{data.inq_last_6mths|tojson}},
+            mths_since_last_delinq = {{data.mths_since_last_delinq|tojson}},
+            open_acc = {{data.open_acc|tojson}},
+            total_acc = {{data.total_acc|tojson}},
+            revol_bal = {{data.revol_bal|tojson}},
+            cred_hist_mth = {{data.cred_hist_mth|tojson}},
+            revol_bal_to_annual_inc = {{data.revol_bal_to_annual_inc|tojson}},
+			
+            alt1_amt = {{data.alt1_amt|tojson}},
+            alt1_term = '36 months',
+            alt1_int = {{data.alt1_rate|tojson}},
+			
+            alt2_amt = {{data.alt2_amt|tojson}},
             alt2_term = "60 months",
-            alt2_int = "XX.XX"
+            alt2_int ={{data.alt2_rate|tojson}}
             ;
 
 //----------------USER INPUTS------------------------------------------
@@ -341,7 +342,7 @@
     //INTEREST RATE
         //IF STATEMENT - IF YES POPULATE INT RATE, IF NO EMPTY
 
-        if (approval==true) {
+        if (approval=='true') {
             svg3.append("text")
                 .attr("class", "subtitle")
                 .attr("x",230)
