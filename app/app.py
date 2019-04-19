@@ -7,6 +7,7 @@ import pandas as pd
 
 app = Flask(__name__)
 app.config['SECRET_KEY']='21312312'
+pd.set_option('display.max_columns', 30)
 
 # landing page for team project
 @app.route("/",methods=['GET','POST'])
@@ -46,21 +47,23 @@ def dashboard():
     
     ## initialize data    
     data['approval'] = modelAPI.getApproval(inputdf)
+
     data['interest'] = modelAPI.getInterestRate(inputdf)
     data['Credit_Score'] = modelAPI.getCreditScore(inputdf)
-    if data['approval'] == 'true':
+
+    if (data['approval'] == 'true') and (data['interest'] > 5):
         data['alt1_amt']='none'
         data['alt1_rate']='none'
         data['alt2_amt']='none'
         data['alt2_rate']='none'
 
     else:
+        data['approval'] = 'False'
         alternate =modelAPI.getAlternative(inputdf)
         data['alt1_amt']=alternate[0]
         data['alt1_rate']=alternate[1]
         data['alt2_amt']=alternate[2]
         data['alt2_rate']=alternate[3]
-
     return render_template('results_page.html',data=data)
 
 def ParseUserInput(form):
