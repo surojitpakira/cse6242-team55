@@ -50,6 +50,11 @@ def dashboard():
 
     data['interest'] = modelAPI.getInterestRate(inputdf)
     data['Credit_Score'] = modelAPI.getCreditScore(inputdf)
+    if data['Credit_Score'] >= 850.0:
+        data['Credit_Score'] = 850
+    if data['Credit_Score'] <= 300.0:
+        data['Credit_Score'] = 300
+
 
     if (data['approval'] == 'true') and (data['interest'] > 5):
         data['alt1_amt']='none'
