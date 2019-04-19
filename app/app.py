@@ -53,14 +53,14 @@ def dashboard():
         data['alt1_rate']='none'
         data['alt2_amt']='none'
         data['alt2_rate']='none'
-#        return str(data)
+
     else:
         alternate =modelAPI.getAlternative(inputdf)
         data['alt1_amt']=alternate[0]
         data['alt1_rate']=alternate[1]
         data['alt2_amt']=alternate[2]
         data['alt2_rate']=alternate[3]
-#    return str(data)
+
     return render_template('results_page.html',data=data)
 
 def ParseUserInput(form):
