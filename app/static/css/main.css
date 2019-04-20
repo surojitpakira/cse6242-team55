@@ -104,3 +104,10 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+.btn-outline-info {
+	float:right;
+	position: absolute;
+	right: 100px;
+	bottom: 50px;
+	display:flex;
+}
