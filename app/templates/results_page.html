@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
         <title>Loan Application Results</title>
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
@@ -55,6 +57,7 @@
     <div id="chloro"></div> 
     <body>
         <script type="text/javascript">
+	var intViewportWidth = window.innerWidth*0.9;
 
     var margin = 50,
             Credit_Score = {{data.Credit_Score|tojson}},
@@ -88,7 +91,7 @@
 //----------------INTRO------------------------------------------
 
         var intro_height = 50,
-            intro_width = 800;
+            intro_width = intViewportWidth;
 
         var svg = d3.select("#intro").append("svg")
             .attr("width", intro_width + margin)
@@ -115,7 +118,7 @@
 //----------------LOAN SUMMARY------------------------------------------
 
         var summary_height = 100,
-            summary_width = 800;
+            summary_width = intViewportWidth;
 
         var svg2 = d3.select("#summary").append("svg")
             .attr("width", summary_width + margin)
@@ -133,7 +136,7 @@
             .text("Application Summary");
 
         svg2.append("line")
-            .style("stroke", "black")
+            .style("stroke", "grey")
             .style("stroke-width", "2px")
             .attr("x1", -margin)
             .attr("y1", -margin+2)
@@ -143,176 +146,176 @@
 //FIRST COLUMN
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",-40)
+            .attr("x",innerWidth/10)
             .attr("y",-margin+60)
             .text("Loan Amount:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",-40)
+            .attr("x",innerWidth/10)
             .attr("y",-margin+80)
             .text("Term:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",-40)
+            .attr("x",innerWidth/10)
             .attr("y",-margin+100)
             .text("Employment Legnth:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",-40)
+            .attr("x",innerWidth/10)
             .attr("y",-margin+120)
             .text("Zip Code:");
 
     //INSERT VALUES
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",80)
+            .attr("x",innerWidth/10 + 150)
             .attr("y",-margin+60)
             .text("$"+loan_amt);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",80)
+            .attr("x",innerWidth/10 + 150)
             .attr("y",-margin+80)
             .text(term + " mo");
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",80)
+            .attr("x",innerWidth/10 + 150)
             .attr("y",-margin+100)
             .text(emp_length + " yrs");
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",80)
+            .attr("x",innerWidth/10 + 150)
             .attr("y",-margin+120)
             .text(zip_code);
 
 //SECOND COLUMN
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",150)
+            .attr("x",innerWidth/10*3)
             .attr("y",-margin+60)
             .text("Annual Income:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",150)
+            .attr("x",innerWidth/10*3)
             .attr("y",-margin+80)
             .text("Debt - Income Ratio:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",150)
+            .attr("x",innerWidth/10*3)
             .attr("y",-margin+100)
             .text("Revolving Balance:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",150)
+            .attr("x",innerWidth/10*3)
             .attr("y",-margin+120)
             .text("Revolving Bal. - Income Ratio:");
 
     //INSERT VALUES
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",320)
+            .attr("x",innerWidth/10*3+200)
             .attr("y",-margin+60)
             .text("$"+annual_inc);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",320)
+            .attr("x",innerWidth/10*3+200)
             .attr("y",-margin+80)
             .text(dti);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",320)
+            .attr("x",innerWidth/10*3+200)
             .attr("y",-margin+100)
             .text("$"+revol_bal);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",320)
+            .attr("x",innerWidth/10*3+200)
             .attr("y",-margin+120)
             .text(revol_bal_to_annual_inc);
 
 //THIRD COLUMN
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",380)
+            .attr("x",innerWidth/10*5)
             .attr("y",-margin+60)
             .text("# Total Accounts:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",380)
+            .attr("x",innerWidth/10*5)
             .attr("y",-margin+80)
             .text("# Open Accounts:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",380)
+            .attr("x",innerWidth/10*5)
             .attr("y",-margin+100)
             .text("# Deliquencies in Last 2 Years:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",380)
+            .attr("x",innerWidth/10*5)
             .attr("y",-margin+120)
             .text("# Months Since Delinquency:");
 
     //INSERT VALUES
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",550)
+            .attr("x",innerWidth/10*5+200)
             .attr("y",-margin+60)
             .text(total_acc);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",550)
+            .attr("x",innerWidth/10*5+200)
             .attr("y",-margin+80)
             .text(open_acc);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",550)
+            .attr("x",innerWidth/10*5+200)
             .attr("y",-margin+100)
             .text(delinq_2yrs);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",550)
+            .attr("x",innerWidth/10*5+200)
             .attr("y",-margin+120)
             .text(mths_since_last_delinq);
 
 //LAST COLUMN
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",600)
+            .attr("x",innerWidth/10*7)
             .attr("y",-margin+60)
             .text("# Months of Credit History:");
 
         svg2.append("text")
             .attr("class", "subtitle")
-            .attr("x",600)
+            .attr("x",innerWidth/10*7)
             .attr("y",-margin+80)
             .text("# Inquiries in Last 6 Months:");
     
     //INSERT VALUES
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",760)
+            .attr("x",innerWidth/10*7+ 150)
             .attr("y",-margin+60)
             .text(cred_hist_mth);
 
         svg2.append("text")
             .attr("class", "value")
-            .attr("x",760)
+            .attr("x",innerWidth/10*7+150)
             .attr("y",-margin+80)
             .text(inq_last_6mths);
 
@@ -323,7 +326,7 @@
         if (approval == "true") {
 
             var approval_height = 70,
-                approval_width = 800;
+                approval_width = intViewportWidth;
 
             var ap_mid = (approval_width+margin)/2-margin
 
@@ -343,7 +346,7 @@
                 .text("Approval");
 
             svg3.append("line")
-                .style("stroke", "black")
+                .style("stroke", "grey")
                 .style("stroke-width", "2px")
                 .attr("x1", -margin)
                 .attr("y1", -margin+2)
@@ -353,32 +356,32 @@
         //LOAN APPROVAL
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",240)
+                .attr("x",intViewportWidth/2 - 200)
                 .attr("y",-margin+60)
                 .style("font-size","15px")
                 .text("Is Loan Likely To Be Approved:");
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",450)
+                .attr("x",intViewportWidth/2+ 100)
                 .attr("y",-margin+60)
-                .style("font-size","15px")
+                .style("font-size","30px")
                 .attr('fill','green')
                 .text( "Yes");
 
      //INTEREST RATE
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",240)
+                .attr("x",intViewportWidth/2 - 200)
                 .attr("y",-margin+90)
                 .style("font-size","15px")
                 .text("Likely Interest Rate:");
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",450)
+                .attr("x",intViewportWidth/2+ 100)
                 .attr("y",-margin+90)
-                .style("font-size","15px")
+                .style("font-size","30px")
                 .text(interest+"%");
         ;}
         
@@ -405,7 +408,7 @@
                 .text("Approval");
 
             svg3.append("line")
-                .style("stroke", "black")
+                .style("stroke", "grey")
                 .style("stroke-width", "2px")
                 .attr("x1", -margin)
                 .attr("y1", -margin+2)
@@ -424,7 +427,7 @@
                 .attr("class", "value")
                 .attr("x",450)
                 .attr("y",-margin+58)
-                .style("font-size","15px")
+                .style("font-size","30px")
                 .attr('fill','red')
                 .text("No");    
     
@@ -524,11 +527,11 @@
 //----------------KEY STATISTICS------------------------------------------
 
         var stats_height = 300,
-            stats_width = 800;
+            stats_width = intViewportWidth;
 
-        var gauge_width = 500,
-            gauge_height     = 300, 
-            gauge_margin     = 40,
+        var gauge_width = intViewportWidth/2,
+            gauge_height     = 400, 
+            gauge_margin     = 70,
             n          = 30,
             radius     = gauge_width/2 - (gauge_margin*2),
             needleRad  = 10,
@@ -559,7 +562,7 @@
             .text("Key Statistics");
 
         svg4.append("line")
-            .style("stroke", "black")
+            .style("stroke", "grey")
             .style("stroke-width", "2px")
             .attr("x1", -200)
             .attr("y1", -198)
@@ -683,8 +686,8 @@
 
         getData(); // popuate data
 
-        var width = 400 - 2*margin,
-            height = 300 - 2*margin;
+        var width = intViewportWidth/2 - 2*margin,
+            height = 300 - 2*margin;8
 
         var x = d3.scale.linear()
             .range([0, width]);
@@ -797,7 +800,7 @@
 //----------------CHLORO------------------------------------------
 
         var chloro_height = 500,
-            chloro_width = 800;
+            chloro_width = intViewportWidth;
 
         var svg5 = d3.select("#chloro").append("svg")
             .attr("width", chloro_width)
@@ -811,7 +814,7 @@
         
         var projection = d3.geo.albersUsa()
             .scale(1000)
-            .translate([width / 2, height / 2]);
+            .translate([400 / 2, 0]);
         
         var path = d3.geo.path()
             .projection(projection);
