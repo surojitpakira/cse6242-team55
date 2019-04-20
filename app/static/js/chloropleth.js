@@ -84,12 +84,12 @@
                 .attr("class", "legend")
                 .attr("transform", "translate("+ -50 + "," + -150 + ")")
                 .attr("width", 140)
-                .attr("height", 160)
+                .attr("height", 360)
                 .selectAll("g")
                 .data(chColorScale.range().slice(0,9))
                 .enter()
                 .append("g")
-                .attr("transform", function(d, i) { return "translate(0," + (i * 20) + ")"; });
+                .attr("transform", function(d, i) { return "translate(20," + (250 + i * 20) + ")"; });
 
             legend.append("rect")
                 .attr("width", 18)
