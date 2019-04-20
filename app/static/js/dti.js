@@ -19,8 +19,8 @@ var makedtiViz = function(dtibinMap) {
 
     // Define dimensions of vis
     var margin = { top: 30, right: 50, bottom: 100, left: 50 },
-        width  = 700 - margin.left - margin.right,
-        height = 350 - margin.top  - margin.bottom;
+        width  = 500 - margin.left - margin.right,
+        height = 275 - margin.top  - margin.bottom;
 
     // Make x scale
     var xScale = d3.scale.ordinal()
@@ -37,7 +37,8 @@ var makedtiViz = function(dtibinMap) {
         .attr("width",  width  + margin.left + margin.right)
         .attr("height", height + margin.top  + margin.bottom)
       .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .style("font-size", "10px");
 
     // Make x-axis and add to canvas
     var xAxis = d3.svg.axis()
@@ -54,7 +55,8 @@ var makedtiViz = function(dtibinMap) {
             .attr("dy", ".15em")
             .attr("transform", function(d) {
                 return "rotate(-65)" 
-                });;;
+                })
+            .style("font-size", "10px");
 
     // Make y-axis and add to canvas
     var yAxis = d3.svg.axis()
@@ -70,7 +72,8 @@ var makedtiViz = function(dtibinMap) {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Percent Accepted");
+        .text("Percent Accepted")
+        .style("font-size", "10px");
 
     var updateBars = function(data) {
         // First update the y-axis domain to match data
@@ -111,7 +114,8 @@ var makedtiViz = function(dtibinMap) {
 
     var dropdown = d3.select("#dti_object")
         .insert("select", "svg")
-        .on("change", dropdownChange);
+        .on("change", dropdownChange)
+        .style("font-size", "10px");
 
     dropdown.selectAll("option")
         .data(dtiamounts)

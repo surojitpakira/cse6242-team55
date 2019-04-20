@@ -39,7 +39,7 @@ select {
 .column {
   float: left;
   width: 50%;
-  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 40px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* Clear floats after the columns */
