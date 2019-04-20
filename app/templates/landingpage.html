@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+
+	<head>
+		<!-- Required meta tags -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+		
+		<!-- Java Script  -->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.v3.min.js')}}"></script>
+		<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+		<link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='css/bubbles.css')}}">
+		<link rel='stylesheet' type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		
+  	</head>
+
+	<body>
+
+<!--------- VIDEO TITLE -->
+
+		<br>
+		<br>
+
+		<div class="pagebreak"> 
+
+	  		<h1><center>p2p Loan Acceptance Predictor</center></h1>
+	  		<h4><center>Watch the video below to get started</center></h4>
+
+  		</div>
+
+<!--------- VIDEO -->
+
+		<br>
+		<br>
+
+		<div align="center">
+
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/jT9Ck3iPVNM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+		</div>
+
+		<br>
+		<br>
+		<br>
+
+		<hr align="center">
+
+<!--------- BUBBLE VIZUALIZATION TITLE -->
+
+		<br>
+
+  		<div class="pagebreak"> 
+
+	  		<h1><center>Explore the variables that effect your loan decision</center></h1>
+	  		<h4><center>Hover over a bubble on the left to see the variable name and a description</center></h4>
+
+  		</div>
+
+<!--------- BUBBLE VIZUALIZATION -->
+
+  		<div id="chart1" align="center">
+
+			<script type='text/javascript' src="{{url_for('static',filename='js/bubbles.js')}}"> </script>
+
+    	</div>
+
+    	<br>
+    	<br>
+
+    	<hr align="center">
+
+<!--------- BAR CHART TITLE -->
+
+    	<br>
+
+  		<div class="pagebreak"> 
+
+  			<h1><center>See how other customers fared</center></h1>
+	  		<h4><center>Choose your loan amount in the drop down to see what percentage of applications were accepted.</center></h4>
+   		
+   		</div>
+
+    	<br>
+    	<br>
+
+		<div class="row">
+
+
+
+<!--------- EMPLOYMENT CHART -->
+
+		 	<div class="column" id="chart2">'
+
+			  	<h2><center>Percentage Accepted by Employment Length</center></h2>
+
+	  	    	<br>
+
+				<script type='text/javascript' src="{{url_for('static',filename='js/employment.js')}}"> </script>
+
+		  	</div>
+
+<!--------- DTI CHART  -->
+
+		  	<div class="column" id="dti_object">
+
+			  	<h2><center>Percentage Accepted by DTI</center></h2>
+
+			  	<br>
+
+				<script type='text/javascript' src="{{url_for('static',filename='js/dti.js')}}"> </script>
+
+  			</div>
+
+		</div>
+
+    	<hr align="center">
+
+<!--------- CHLOROPLETH CHART  -->
+    
+
+  		<div class="pagebreak"> 
+
+	  		<h1><center>Explore the loan acceptance rate in your state</center></h1>
+	  		<h4><center>Hover over a state to see the acceptance rate</center></h4>
+
+  		</div>
+
+	    <div id="chloro" align="center">>
+
+			<script type='text/javascript' src="{{url_for('static',filename='js/chloropleth.js')}}"> </script>
+
+	    </div> 
+		
+<!--------- User Input Form   -->		
+
+		<main role="main" class="container">
+		  <div class="row">
+			<div class="col-lg-10">
+			  {% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+				  {% for category, message in messages %}
+					<div class="alert alert-{{ category }}">
+					  {{ message }}
+					</div>
+				  {% endfor %}
+				{% endif %}
+			  {% endwith %}
+			  {% block content %}{% endblock %}
+			</div>
+		  </div>
+		</main>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+  	</body>
+
+</html>
