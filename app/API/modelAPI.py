@@ -58,9 +58,9 @@ def getApproval(inputdf):
     '''
     result = APPROVAL.predict(inputdf)
     if result[0] == 0:
-        return True
+        return 'true'
     else:
-        return False
+        return 'False'
 
 def getInterestRate(inputdf):
     ''' Check your Interest rate is your loan is approved

@@ -4,135 +4,149 @@ var margin = {
     top: 0,
     right: 0,
     bottom: 0,
-    left: 100
+    left: 0
 },
-
 width = 1500 - margin.left - margin.right,
-height = 550 - margin.top - margin.bottom;
+height = 300 - margin.top - margin.bottom;
 
-var radius = d3.scale.sqrt().range([30, 30]);
+var radius = d3.scale.sqrt().range([25, 25]);
 var padding = 5;
 var nodes = 
     	[
         {   "title" : "Loan Amount", 
             "desc" : "How much do you want to borrow?",
-            "impt" : "This is important because...",
+            "impt" : "This is the largest determinate in whether or not your loan will be accepted.",
             "color" : "lightpink",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325}, 
+            "color2" : "lightsalmon",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Term", 
-            "desc" : "Length of the loan you may apply for",
-            "impt" : "This is important because...",
+            "desc" : "How long do you want to repay your loan?",
+            "impt" : "Choose 36 or 60. Shorter loans will have larger monthly payments.",
             "color" : "lightsalmon",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325}, 
+            "color2" : "lightcoral",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Employment Length", 
             "desc" : "This is the length you have been employed for your entire career",
-            "impt" : "This is important because...",
+            "impt" : "This is important because longer employment demonstrates lower risk.",
             "color" : "lightcoral",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "firebrick",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Home Ownership", 
             "desc" : "Do you own a home, have a mortgage, or rent?",
-            "impt" : "This is important because...",
-            "color" : "firebrick",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "impt" : "Owning a home increase the amount of money you can borrow.",
+            "color" : "slategray",
+            "color2" : "lightpink",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Annual Income", 
             "desc" : "How much will you earn this year?",
-            "impt" : "This is important because...",
+            "impt" : "The more you earn, the more you can borrow.",
             "color" : "slategray",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "mediumseagreen",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Zip Code", 
             "desc" : "Where do you live?",
-            "impt" : "This is important because...",
-            "color" : "mistyrose",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "impt" : "Our analysis has determined different locations carry different risks.",
+            "color" : "MediumSeaGreen",
+            "color2" : "darkkhaki",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "DTI", 
             "desc" : "What is the ratio of your debt to income?",
-            "impt" : "This is important because...",
+            "impt" : "The lower your DTI, the lower your risk of defaulting.",
             "color" : "darkkhaki",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "orchid",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Recent Delinquencies", 
             "desc" : "Have you missed any payments or defaulted in the last two years?",
-            "impt" : "This is important because...",
-            "color" : "lavender",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "impt" : "Missing payments is a bad thing and demonstrates series risk.",
+            "color" : "Orchid",
+            "color2" : "lightgreen",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Recent Inquiries", 
             "desc" : "Have you missed any payments or defaulted in the last two years?",
-            "impt" : "This is important because...",
+            "impt" : "Inquires may reduce your credit score as lenders may see too much activity as risky.",
             "color" : "lightgreen",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "royalblue",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Months Since Last Delincuency", 
             "desc" : "Have you missed any payments or defaulted in the last two years?",
-            "impt" : "This is important because...",
-            "color" : "lightcyan",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "impt" : "Missing payments is a bad thing and demonstrates series risk.",
+            "color" : "RoyalBlue",
+            "color2" : "sienna",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Open Accounts", 
             "desc" : "How many open accounts do you have?",
-            "impt" : "This is important because...",
+            "impt" : "A low DTI combined with many open accounts could show you're a responsible borrower.",
             "color" : "sienna",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "steelblue",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Total Accounts", 
             "desc" : "How many open accounts have you ever had?",
-            "impt" : "This is important because...",
+            "impt" : "More accounts indicate more credit. If you handled it responsibly, that's a good thing.",
             "color" : "steelblue",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "plum",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Revolving Balances", 
             "desc" : "What is the balance you have on all of your current open accounts?",
-            "impt" : "This is important because...",
+            "impt" : "Having high revolving balances lowers your chances of getting a loan.",
             "color" : "plum",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "seagreen",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Credit Length", 
             "desc" : "How long have you had credit in your entire life?",
-            "impt" : "This is important because...",
+            "impt" : "Lenders like a long, rich history of credit, especially when handled responsibly.",
             "color" : "seagreen",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325},
+            "color2" : "darkturquoise",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
 
         {   "title" : "Revolving Balance / Annual Income", 
             "desc" : "What's your revolving balance / annual income?",
-            "impt" : "This is important because...",
+            "impt" : "A low ratio for this metric indicates a better likelihood of repayment.",
             "color" : "darkturquoise",
-            "radius" : 50,
-            "cx" : 350,
-            "cy" : 325}
+            "color2" : "lightpink",
+            "radius" : 25,
+            "cx" : 250,
+            "cy" : 150}, 
       ]
 ;
 
@@ -144,7 +158,7 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 
-var svg = d3.select("#chart").append("svg")
+var svg = d3.select("#chart1").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -153,13 +167,11 @@ var svg = d3.select("#chart").append("svg")
 var circle = svg.selectAll("circle")
     .data(nodes)
     .enter().append("circle")
-    .attr("r", function (d) {
-    return d.radius;
-})
-    .style("fill", function (d) {
-    return d.color;
-})
-    .call(force.drag);
+    .attr("r", function (d) { return d.radius; })
+    .style("fill", function (d) { return d.color})
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut)
+    .call(force.drag)
 
 function tick(e) {
     circle.each(gravity(.2 * e.alpha))
@@ -236,58 +248,52 @@ function collide(alpha) {
     };
 }
 
-// CREATE THE SVG OBJECTS
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g");
 
-var circle = svg.selectAll("circle")
-    .data(nodes)
-    .enter().append("circle")
-    .attr("r", function (d) { return d.radius; })
-    .style("fill", function (d) { return d.color})
-    .on("mouseover", handleMouseOver)
-    .on("mouseout", handleMouseOut)
-    .call(force.drag)
 
 // CREATE MOUSE EVENT HANDLERS
 function handleMouseOver(d) { 
 
     d3.select(this)
-        .transition().duration(100)
+        .transition().duration(150)
         .style("fill", "lightgray");
 
     svg.append("text")
         .attr({
             id: "id",  
             x: d.x,
-            y: d.y + 11
+            y: d.y + 6
             })
-        .text(function() { return d.title; });
+        .text(function() { return d.title; })
+        .attr("font-size", 15);
+
 
     svg.append("text").attr({
             id: "id2",  
-            x: 1000,
-            y: 200
+            x: 900,
+            y: 125
             })
-        .text(function() { return d.desc; });
+        .text(function() { return d.desc; })
+        .attr("fill", function() { return d.color; })
+        .attr("font-size", 15);
+
 
     svg.append("text").attr({
             id: "id3",  
-            x: 1000,
-            y: 325
+            x: 900,
+            y: 200
             })
-        .text(function() { return d.impt; });
+        .text(function() { return d.impt; })
+        .attr("fill", function() { return d.color2; })
+        .attr("font-size", 20);
         
 
 }
 
 function handleMouseOut(d) {
     d3.select(this)
-        .transition().duration(100)
+        .transition().duration(150)
         .attr({
-            r: 50
+            r: 25
         })
         .style("fill", function(d) { return d.color});
 
@@ -295,6 +301,4 @@ function handleMouseOut(d) {
     d3.select("#id2").remove();
     d3.select("#id3").remove();  // Remove text location
 };
-
-console.log(nodes);
  
