@@ -720,25 +720,25 @@
 
         svg4.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate("+ 350 +"," + 90 + ")")
+            .attr("transform", "translate("+ 450 +"," + 90 + ")")
             .call(xAxis);
 
         svg4.append("g")
             .attr("class", "y axis")
-            .attr("transform", "translate("+ 350 +"," + -110 + ")")
+            .attr("transform", "translate("+ 450 +"," + -110 + ")")
             .call(yAxis);
 
         svg4.append("path")
         .datum(array1)
         .attr("class", "line")
         .attr("d", line)
-        .attr("transform", "translate("+ 350 +"," + -110 + ")")
+        .attr("transform", "translate("+ 450 +"," + -110 + ")")
         .style("fill", "#fdae61")
         .style("opacity", "0.5");
 
         svg4.append("text")
             .attr("class", "subtitle")
-            .attr("x",600)
+            .attr("x",650)
             .attr("y",-150)
             .style("text-anchor","middle")
             .style("text-decoration", "underline")
