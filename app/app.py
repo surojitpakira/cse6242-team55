@@ -50,6 +50,10 @@ def dashboard():
 
     data['interest'] = modelAPI.getInterestRate(inputdf)
     data['Credit_Score'] = modelAPI.getCreditScore(inputdf)
+    data['loan_amnt'] =  PrettyNumber(data['loan_amnt'])
+    data['revol_bal'] =  PrettyNumber(data['revol_bal'])
+    data['annual_inc'] =  PrettyNumber(data['annual_inc'])
+    
     if data['Credit_Score'] >= 850.0:
         data['Credit_Score'] = 850
     if data['Credit_Score'] <= 300.0:
@@ -108,6 +112,9 @@ def ParseUserInput(form):
         output_dict['revol_bal_to_annual_inc'] = 999.
         
     return output_dict
-#    
+
+def PrettyNumber(number): 
+    return ("{:,}".format(number))
+
 if __name__ == '__main__':
     app.run(debug=True)
