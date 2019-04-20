@@ -585,14 +585,14 @@
             .append('path')
             .attr('class', 'slice')
             .attr('d', arc)
-            .attr("transform", "translate(" + 50 + "," + 70 + ")")
+            .attr("transform", "translate(" + 40 + "," + 70 + ")")
             .attr('fill', function(d) { return gauge_colorScale(d); });
 
         var needle = svg4.append('g').append('path')
             .attr('class', 'needle')
             .attr('fill-opacity', .7)
             .attr('stroke', 'black')
-            .attr("transform", "translate(" + 50 + "," + 70 + ")");
+            .attr("transform", "translate(" + 40 + "," + 70 + ")");
 
         var text = svg4.append('g').append('text')
             .attr('class', 'text')
@@ -738,7 +738,7 @@
 
         svg4.append("text")
             .attr("class", "subtitle")
-            .attr("x",650)
+            .attr("x",750)
             .attr("y",-150)
             .style("text-anchor","middle")
             .style("text-decoration", "underline")
