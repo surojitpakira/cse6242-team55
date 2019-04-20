@@ -364,9 +364,9 @@
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",intViewportWidth/2+ 100)
+                .attr("x",intViewportWidth/2+ 50)
                 .attr("y",-margin+60)
-                .style("font-size","30px")
+                .style("font-size","24px")
                 .attr('fill','green')
                 .text( "Yes");
 
@@ -380,16 +380,16 @@
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",intViewportWidth/2+ 100)
+                .attr("x",intViewportWidth/2+ 50)
                 .attr("y",-margin+90)
-                .style("font-size","30px")
+                .style("font-size","24px")
                 .text(interest+"%");
         ;}
         
         else {
 
             var approval_height = 120,
-                approval_width = 800;
+                approval_width = intViewportWidth;
 
             var ap_mid = (approval_width+margin)/2-margin
 
@@ -410,7 +410,7 @@
 
             svg3.append("line")
                 .style("stroke", "grey")
-                .style("stroke-width", "2px")
+                .style("stroke-width", "0.5px")
                 .attr("x1", -margin)
                 .attr("y1", -margin+2)
                 .attr("x2", approval_width+margin*2)
@@ -419,23 +419,23 @@
         //LOAN APPROVAL - NO
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",240)
-                .attr("y",-margin+58)
+                .attr("x",intViewportWidth/2 - 200)
+                .attr("y",-margin+60)
                 .style("font-size","15px")
                 .text("Is Loan Likely To Be Approved:");
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",450)
-                .attr("y",-margin+58)
-                .style("font-size","30px")
+                .attr("x",intViewportWidth/2 + 50)
+                .attr("y",-margin+60)
+                .style("font-size","26px")
                 .attr('fill','red')
                 .text("No");    
     
         //ALTERNATE 1
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",140)
+                .attr("x",intViewportWidth/2 - 260)
                 .attr("y",-margin+90)
                 .style("font-size","13px")
                 .style("text-decoration", "underline") 
@@ -443,45 +443,45 @@
             
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",140)
+                .attr("x",intViewportWidth/2 - 260)
                 .attr("y",-margin+110)
                 .text("Loan Amount");
 
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",140)
+                .attr("x",intViewportWidth/2 - 260)
                 .attr("y",-margin+130)
                 .text("Term");
 
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",140)
+                .attr("x",intViewportWidth/2 - 260)
                 .attr("y",-margin+150)
                 .text("Likely Interest Rate");
 
         //INSERT VALUES
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",280)
+                .attr("x",intViewportWidth/2 - 120)
                 .attr("y",-margin+110)
                 .text("$"+alt1_amt);
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",280)
+                .attr("x",intViewportWidth/2 - 120)
                 .attr("y",-margin+130)
                 .text(alt1_term);
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",280)
+                .attr("x",intViewportWidth/2 - 120)
                 .attr("y",-margin+150)
                 .text(alt1_int+"%");
 
         //ALTERNATE 2
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",430)
+                .attr("x",intViewportWidth/2 + 30)
                 .attr("y",-margin+90)
                 .style("font-size","13px")
                 .style("text-decoration", "underline") 
@@ -489,38 +489,38 @@
 
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",430)
+                .attr("x",intViewportWidth/2 + 30)
                 .attr("y",-margin+110)
                 .text("Loan Amount");
 
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",430)
+                .attr("x",intViewportWidth/2 + 30)
                 .attr("y",-margin+130)
                 .text("Term");
 
             svg3.append("text")
                 .attr("class", "subtitle")
-                .attr("x",430)
+                .attr("x",intViewportWidth/2 + 30)
                 .attr("y",-margin+150)
                 .text("Likely Interest Rate");
 
         //INSERT VALUES
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",550)
+                .attr("x",intViewportWidth/2 + 170)
                 .attr("y",-margin+110)
                 .text("$"+alt2_amt);
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",550)
+                .attr("x",intViewportWidth/2 + 170)
                 .attr("y",-margin+130)
                 .text(alt2_term);
 
             svg3.append("text")
                 .attr("class", "value")
-                .attr("x",550)
+                .attr("x",intViewportWidth/2 + 170)
                 .attr("y",-margin+150)
                 .text(alt2_int+"%");
         }
