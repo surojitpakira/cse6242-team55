@@ -684,11 +684,6 @@
  //----------------BELL CURVE----------------------------------
         var intViewportWidth = window.innerWidth*0.9;
 
-//         var margin = 50;
-
-//         var stats_height = 300,
-//             stats_width = intViewportWidth;
-
         var width = intViewportWidth/2 - 2*margin,
             height = 300 - 2*margin;
 
@@ -723,21 +718,6 @@
 
         y.domain([0, max_p])
 
-//         var svg4 = d3.select("#stats").append("svg")
-//         .attr("width", stats_width+margin)
-//         .attr("height", stats_height+margin)
-//         .append("g")
-//         .attr("transform", "translate(" + 180 + "," + 200 + ")");
-
-//         svg4.append("text")
-//             .attr("class", "title")
-//             .attr("x",(stats_width+margin)/2-margin-130)
-//             .attr("y",-200+27)
-//             .style("text-anchor","middle")
-//             .style("font-weight","bold")
-//             .style("font-size","18px")
-//             .text("Key Statistics");
-
         svg4.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate("+ 350 +"," + 90 + ")")
@@ -758,7 +738,7 @@
 
         svg4.append("text")
             .attr("class", "subtitle")
-            .attr("x",500)
+            .attr("x",600)
             .attr("y",-150)
             .style("text-anchor","middle")
             .style("text-decoration", "underline")
@@ -778,8 +758,6 @@
           };
           return dataset;
   };
-
-
 
 //----------------CHLORO------------------------------------------
 
