@@ -18,7 +18,7 @@ d3.csv(fileName, function(error, data) {
 var makedtiViz = function(dtibinMap) {
 
     // Define dimensions of vis
-    var margin = { top: 30, right: 50, bottom: 100, left: 50 },
+    var margin = { top: 30, right: 50, bottom: 80, left: 50 },
         width  = 500 - margin.left - margin.right,
         height = 275 - margin.top  - margin.bottom;
 

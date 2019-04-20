@@ -40,6 +40,8 @@ select {
   float: left;
   width: 50%;
   font: 40px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 50px;
+
 }
 
 /* Clear floats after the columns */
