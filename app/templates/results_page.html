@@ -683,69 +683,120 @@
 
         // BELL CURVE
 	
-	// 	count    1283531.0000
-	// 	mean       76148.4372
-	// 	std        70134.9299
-	// 	min            0.0000
-	// 	25%        45945.5000
-	// 	50%        65000.0000
-	// 	75%        90000.0000
-	// 	max     10999200.0000
-	
+        var data = [];
+
+        getData(); // popuate data
+
         var width = intViewportWidth/2 - 2*margin,
             height = 300 - 2*margin;8
 
-	var array1 = Random_normal_Dist(76148.4372, 70134.9299);
+        var x = d3.scale.linear()
+            .range([0, width]);
 
-	var xAxis = d3.scale.linear()
-		    .rangeRound([0, width]);
-	    //Min q
-	var min_d = d3.min(array1, function (d) { return d.q; });
-	    //Max q
-	var max_d = d3.max(array1, function (d) { return d.q; });
-	    //Max p
-	max_p = d3.max(array1, function (d) { return d.p; });
+        var y = d3.scale.linear()
+            .range([height, 0]);
 
-	x.domain([min_d, max_d]).nice;
-        
-        var yAxis = d3.scale.linear()
-	      .domain([0, max_p])
-	      .range([height, 0]);
-	
-        var gX = svg4.append("g")
-              .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
-              .call(xAxis);
-              // .call(d3.axisBottom(x));
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
 
-        var gY = svg4.append("g")
-		     .attr("class", "y axis")
-		     .call(yAxis)
-		     // .call(d3.axisLeft(y));
-        var line = d3.svg4.line()
-	      .x(function (d) { return x(d.q); })
-	      .y(function (d) { return y(d.p); });
-		
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
+
+        var line = d3.svg.line()
+            .x(function(d) {
+                return x(d.q);
+            })
+            .y(function(d) {
+                return y(d.p);
+            });
+
+     /*   var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); */
+
+        x.domain(d3.extent(data, function(d) {
+            return d.q;
+        }));
+        y.domain(d3.extent(data, function(d) {
+            return d.p;
+        }));
+
+        svg4.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate("+ 350 +"," + 90 + ")")
+            .call(xAxis);
+
+        svg4.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate("+ 350 +"," + -110 + ")")
+            .call(yAxis);
+
         svg4.append("path")
-	      .datum(array1)
-	      .attr("class", "line")
-	      .attr("d", line)
-	      .style("fill", "#fdae61")
-	      .style("opacity", "0.5");
-		
-        function Random_normal_Dist(mean, sd) {
-	      dataset = [];
-	      for (var i = mean - 4 * sd; i < mean + 4 * sd; i += 1) {
-		  q = i
-		  p = jStat.normal.pdf(i, mean, sd);
-		  arr = {
-		      "q": q,
-		      "p": p
-		  }
-		  dataset.push(arr);
-	      };
-	      return dataset;
-	}
+            .datum(data)
+            .attr("class", "line")
+            .attr("transform", "translate("+ 350 +"," + -110 + ")")
+            .attr("d", line);
+
+        svg4.append("text")
+            .attr("class", "subtitle")
+            .attr("x",500)
+            .attr("y",-150)
+            .style("text-anchor","middle")
+            .style("text-decoration", "underline") 
+            .style("font-size","14px")
+            .text("Income Distribution");
+
+        function getData() {
+
+        // loop to populate data array with
+        // probabily - quantile pairs
+        for (var i = 0; i < 100000; i++) {
+            q = normal() // calc random draw from normal dist
+            p = gaussian(q) // calc prob of rand draw
+            el = {
+                "q": q,
+                "p": p
+            }
+            data.push(el)
+        };
+
+        // need to sort for plotting
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+        data.sort(function(x, y) {
+            return x.q - y.q;
+        });
+        }
+
+        // from http://bl.ocks.org/mbostock/4349187
+        // Sample from a normal distribution with mean 0, stddev 1.
+        function normal() {
+            var x = 0,
+                y = 0,
+                rds, c;
+            do {
+                x = Math.random() * 2 - 1;
+                y = Math.random() * 2 - 1;
+                rds = x * x + y * y;
+            } while (rds == 0 || rds > 1);
+            c = Math.sqrt(-2 * Math.log(rds) / rds); // Box-Muller transform
+            return x * c; // throw away extra sample y * c
+        }
+
+        //taken from Jason Davies science library
+        // https://github.com/jasondavies/science.js/
+        function gaussian(x) {
+            var gaussianConstant = 1 / Math.sqrt(2 * Math.PI),
+                mean = 0,
+                sigma = 1;
+
+            x = (x - mean) / sigma;
+            return gaussianConstant * Math.exp(-.5 * x * x) / sigma;
+        };
+
 //----------------CHLORO------------------------------------------
 
         var chloro_height = 500,
