@@ -683,69 +683,69 @@
 
         // BELL CURVE
 	
-// 	// 	count    1283531.0000
-// 	// 	mean       76148.4372
-// 	// 	std        70134.9299
-// 	// 	min            0.0000
-// 	// 	25%        45945.5000
-// 	// 	50%        65000.0000
-// 	// 	75%        90000.0000
-// 	// 	max     10999200.0000
+	// 	count    1283531.0000
+	// 	mean       76148.4372
+	// 	std        70134.9299
+	// 	min            0.0000
+	// 	25%        45945.5000
+	// 	50%        65000.0000
+	// 	75%        90000.0000
+	// 	max     10999200.0000
 	
-//         var width = intViewportWidth/2 - 2*margin,
-//             height = 300 - 2*margin;8
+        var width = intViewportWidth/2 - 2*margin,
+            height = 300 - 2*margin;8
 
-// 	var array1 = Random_normal_Dist(76148.4372, 70134.9299);
+	var array1 = Random_normal_Dist(76148.4372, 70134.9299);
 
-// 	var xAxis = d3.scale.linear()
-// 		    .rangeRound([0, width]);
-// 	    //Min q
-// 	var min_d = d3.min(array1, function (d) { return d.q; });
-// 	    //Max q
-// 	var max_d = d3.max(array1, function (d) { return d.q; });
-// 	    //Max p
-// 	max_p = d3.max(array1, function (d) { return d.p; });
+	var xAxis = d3.scale.linear()
+		    .rangeRound([0, width]);
+	    //Min q
+	var min_d = d3.min(array1, function (d) { return d.q; });
+	    //Max q
+	var max_d = d3.max(array1, function (d) { return d.q; });
+	    //Max p
+	max_p = d3.max(array1, function (d) { return d.p; });
 
-// 	x.domain([min_d, max_d]).nice;
+	x.domain([min_d, max_d]).nice;
         
-//         var yAxis = d3.scale.linear()
-// 	      .domain([0, max_p])
-// 	      .range([height, 0]);
+        var yAxis = d3.scale.linear()
+	      .domain([0, max_p])
+	      .range([height, 0]);
 	
-//         var gX = svg4.append("g")
-//               .attr("class", "x axis")
-//               .attr("transform", "translate(0," + height + ")")
-//               .call(xAxis);
-//               // .call(d3.axisBottom(x));
+        var gX = svg4.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis);
+              // .call(d3.axisBottom(x));
 
-//         var gY = svg4.append("g")
-// 		     .attr("class", "y axis")
-// 		     .call(yAxis)
-// 		     // .call(d3.axisLeft(y));
-//         var line = d3.svg4.line()
-// 	      .x(function (d) { return x(d.q); })
-// 	      .y(function (d) { return y(d.p); });
-
-//         svg4.append("path")
-// 	      .datum(array1)
-// 	      .attr("class", "line")
-// 	      .attr("d", line)
-// 	      .style("fill", "#fdae61")
-// 	      .style("opacity", "0.5");
-
-//         function Random_normal_Dist(mean, sd) {
-// 	      data = [];
-// 	      for (var i = mean - 4 * sd; i < mean + 4 * sd; i += 1) {
-// 		  q = i
-// 		  p = jStat.normal.pdf(i, mean, sd);
-// 		  arr = {
-// 		      "q": q,
-// 		      "p": p
-// 		  }
-// 		  data.push(arr);
-// 	      };
-// 	      return data;
-// 	  }
+        var gY = svg4.append("g")
+		     .attr("class", "y axis")
+		     .call(yAxis)
+		     // .call(d3.axisLeft(y));
+        var line = d3.svg4.line()
+	      .x(function (d) { return x(d.q); })
+	      .y(function (d) { return y(d.p); });
+		
+        svg4.append("path")
+	      .datum(array1)
+	      .attr("class", "line")
+	      .attr("d", line)
+	      .style("fill", "#fdae61")
+	      .style("opacity", "0.5");
+		
+        function Random_normal_Dist(mean, sd) {
+	      dataset = [];
+	      for (var i = mean - 4 * sd; i < mean + 4 * sd; i += 1) {
+		  q = i
+		  p = jStat.normal.pdf(i, mean, sd);
+		  arr = {
+		      "q": q,
+		      "p": p
+		  }
+		  dataset.push(arr);
+	      };
+	      return dataset;
+	}
 //----------------CHLORO------------------------------------------
 
         var chloro_height = 500,
