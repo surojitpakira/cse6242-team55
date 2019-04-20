@@ -687,7 +687,6 @@
         var width = intViewportWidth/2 - 2*margin,
             height = 300 - 2*margin;
 	
-	var income = data.slice(6),
         var array1 = Random_normal_Dist(76148.4372, 70134.9299);
 	
         var x = d3.scale.linear()
@@ -709,8 +708,7 @@
         .y(function (d) { return y(d.p); });
 
         //Min q
-	//var min_d = d3.min(array1, function (d) { return d.q; });
-        var min_d = 0;
+	var min_d = d3.min(array1, function (d) { return d.q; });
 	//Max q
         var max_d = d3.max(array1, function (d) { return d.q; });
         //Max p
