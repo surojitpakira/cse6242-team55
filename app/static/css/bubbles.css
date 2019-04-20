@@ -4,9 +4,87 @@ circle {
 }
 
 text {
-  font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-anchor: middle;
   pointer-events: none;
   font-weight: bold;
   text-align: left;
 }
+
+.bar {
+    fill: midnightblue;
+    opacity: 0.8;
+}
+
+.bar:hover {
+  fill: mediumseagreen;
+}
+
+
+body {
+    font: 10px sans-serif;
+}
+
+select {
+    display: block;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  width: 100%;
+  font: 10px sans-serif;
+}
+
+.pagebreak {
+  font: 16px sans-serif;
+}
+
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0; padding: 0; }
+
+
+/* CHLOROPLETH
+*/
+
+/*.x.axis path {
+    display: none;
+}*/
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+.states {
+    stroke: #fff;
+    stroke-width:2px;
+}
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 130px;         
+    height: 15px;         
+    padding: 2px;       
+    font: 12px sans-serif;  
+    background: rgb(221, 221, 221); 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;     
+}
+
