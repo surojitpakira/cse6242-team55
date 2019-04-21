@@ -6,3 +6,4 @@ In order to run this app, please follow the instruction below:
 2. install nginx, python (ananconda here for machine learning), python-pip
 3. install gunicorn
 4. change to this directory and run gunicorn app:app
+5. enter the public IP address of your Ubunut VM and have fun!
