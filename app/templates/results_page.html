@@ -716,9 +716,11 @@
 
         x.domain([min_d, max_d]).nice;
 
-        y.domain([0, max_p])
+        y.domain([0, max_p]);
 
-
+        var incScale = d3.scale.linear()
+            .domain([0,350000])
+            .range([664,1032]);
 
         svg4.append("path")
         .datum(array1)
@@ -743,6 +745,22 @@
             .attr("class", "y axis")
             .attr("transform", "translate("+ 663 +"," + -110 + ")")
             .call(yAxis);
+
+        const inc_adj = incScale(parseFloat(annual_inc)*1000)
+
+        svg4.append("rect")
+            .attr("height",200)
+            .attr("width",3)
+            .attr("fill", "steelblue")
+            .attr("transform", "translate("+  inc_adj +"," + -110 + ")");
+
+        svg4.append("text")
+            .attr("class", "subtitle")
+            .attr("x",inc_adj)
+            .attr("y",-113)
+            .style("text-anchor","left")
+            .style("font-size","11px")
+            .text("$"+d3.format(",.0f")(parseFloat(annual_inc)*1000));
 
         svg4.append("text")
             .attr("class", "subtitle")
