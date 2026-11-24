@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.neural_network import MLPRegressor
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.externals import joblib
+import joblib
 from sklearn.decomposition import TruncatedSVD, PCA
 from sklearn.metrics import mean_squared_error
 import os

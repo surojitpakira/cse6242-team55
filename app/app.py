@@ -3,10 +3,11 @@
 from flask import Flask,render_template,url_for,redirect,request,session
 from forms import UserInput
 from API import modelAPI
+import os
 import pandas as pd
 
 app = Flask(__name__)
-app.config['SECRET_KEY']='21312312'
+app.config['SECRET_KEY']=os.environ.get('SECRET_KEY', 'dev-only-change-me')
 pd.set_option('display.max_columns', 30)
 
 # landing page for team project
