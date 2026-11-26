@@ -12,7 +12,8 @@ from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.model_selection import train_test_split, GridSearchCV
 import joblib
 from sklearn.decomposition import TruncatedSVD, PCA
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import (mean_squared_error, mean_absolute_error, r2_score,
+                             accuracy_score, recall_score, roc_auc_score)
 import os
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
@@ -109,8 +110,13 @@ def interest_rate_engine(data):
                     activation='relu', solver='sgd', alpha=0.0001, learning_rate='adaptive', early_stopping=True, verbose=True) )])
 	X_int = data.drop(columns = ['loan_status','int_rate','home_ownership', 'zip_code'])
 	Y_int = data['int_rate']
-	X_int_train, X_int_test, Y_int_train, Y_int_test = train_test_split(X_int, Y_int, test_size=0.1)
+
+	X_int_train, X_int_test, Y_int_train, Y_int_test = train_test_split(X_int, Y_int, test_size=0.1, random_state=42)
 	regressor.fit(X_int_train, Y_int_train)
+	int_pred = regressor.predict(X_int_test)
+	print("Interest rate MAE (percentage points): %.3f" % mean_absolute_error(Y_int_test, int_pred))
+	print("Interest rate R2: %.3f" % r2_score(Y_int_test, int_pred))
+	print("Baseline MAE (always predict the mean): %.3f" % mean_absolute_error(Y_int_test, np.full(len(Y_int_test), Y_int_train.mean())))
 	
 	filename = 'interest_rate_model.sav'
 	joblib.dump(regressor, filename)
@@ -155,9 +161,15 @@ def approval_engine(data):
 	
 	X = data.drop(columns = ['loan_status','int_rate'])
 	Y = data['loan_status']
-	X_train, X_test, Y_train, Y_test = train_test_split(X, Y,    test_size=0.1)
-	#print(X_test.shape, Y_test.shape)
+
+	X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1, random_state=42)
 	clf.fit(X_train, Y_train)
+	pred = clf.predict(X_test)
+	print("Approval accuracy: %.3f" % accuracy_score(Y_test, pred))
+	print("Baseline (always predict repaid): %.3f" % (1 - Y_test.mean()))
+	print("Charged-off recall: %.3f" % recall_score(Y_test, pred))
+	print("Approval ROC AUC: %.3f" % roc_auc_score(Y_test, clf.predict_proba(X_test)[:, 1]))
+	
 	stop = timeit.default_timer()
 
 	print('Model Training Time: ', stop - start)
