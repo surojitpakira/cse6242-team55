@@ -230,7 +230,7 @@ def preSVD(data):
 if __name__ == '__main__':
 	## Load and organize data
 	#data = pd.read_csv("cleaned_LoanStats3a_v2.csv" ,header = 0)
-	data = pd.read_csv("lendingClubCleanData_v3.csv", header = 0)	
+	data = pd.read_csv("lendingClubCleanData_v3.csv", header = 0, dtype={"zip_code": str})	
 	data = data.iloc[:,1:]
 	data = data.drop(columns = ['sub_grade','grade','addr_state'])
 	approved_data = data[data['loan_status'] == 0]

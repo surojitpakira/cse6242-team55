@@ -96,7 +96,7 @@ def ParseUserInput(form):
     debt                                    = float(form.debt.data)
     annual_inc                              = float(form.annual_inc.data)
     if annual_inc !=0:
-        output_dict['dti']                  = round(debt/annual_inc,2)
+        output_dict['dti']                  = round(debt/annual_inc*100,2)
     else:
         output_dict['dti']                  = 999
     output_dict['delinq_2yrs']              = float(form.delinq_2yrs.data)
