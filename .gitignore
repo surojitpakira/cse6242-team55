@@ -1,3 +1,4 @@
 .DS_Store
 __pycache__/
 *.pyc
+app/API/lendingClubCleanData_v3.csv
